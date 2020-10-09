@@ -26,10 +26,10 @@ As configurações do GIT são armazenadas no arquivo **.gitconfig** localizado 
 As configurações realizadas através dos comandos abaixo serão incluídas no arquivo citado acima.
 
 ##### Setar usuário
-	git config --global user.name "Leonardo Comelli"
+	git config --global user.name "Anderson Rafael Schlender"
 
 ##### Setar email
-	git config --global user.email leonardo@software-ltda.com.br
+	git config --global user.email andersonrafaelschlender@gmail.com
 	
 ##### Setar editor
 	git config --global core.editor vim
@@ -180,6 +180,8 @@ A alteração do diretório pode ser realizada através do comando abaixo:
 ### Exibir os repositórios remotos
 
 	git remote
+
+ou
 	
 	git remote -v
 
@@ -208,7 +210,6 @@ O primeiro **push** de um repositório deve conter o nome do repositório remoto
 Os demais **pushes** não precisam dessa informação
 
 	git push
-	
 
 ### Atualizar repositório local de acordo com o repositório remoto
 
@@ -259,17 +260,17 @@ O **HEAD** é um ponteiro *especial* que indica qual é o branch atual. Por padr
 
 ##### Criando um novo branch
 
-	git branch bug-123
+	git branch nome_da_branch
 	
 ##### Trocando para um branch existente
 
-	git checkout bug-123
+	git checkout nome_da_branch
 	
-Neste caso, o ponteiro principal **HEAD** esta apontando para o branch chamado bug-123.
+Neste caso, o ponteiro principal **HEAD** esta apontando para o branch chamado nome_da_branch.
 
 ##### Criar um novo branch e trocar 
 
-	git checkout -b bug-456
+	git checkout -b nome_da_branch
 	
 ##### Voltar para o branch principal (master)
 
@@ -277,7 +278,7 @@ Neste caso, o ponteiro principal **HEAD** esta apontando para o branch chamado b
 	
 ##### Resolver merge entre os branches
 
-	git merge bug-123
+	git merge nome_da_branch
 	
 Para realizar o *merge*, é necessário estar no branch que deverá receber as alterações. O *merge* pode automático ou manual. O merge automático será feito em arquivos textos que não sofreram alterações nas mesmas linhas, já o merge manual será feito em arquivos textos que sofreram alterações nas mesmas linhas.
 
@@ -290,13 +291,18 @@ A mensagem indicando um *merge* manual será:
 
 ##### Apagando um branch
 
-	git branch -d bug-123
+	git branch -d nome_da_branch
 
 ##### Listar branches 
 
 ###### Listar branches
 
 	git branch
+	
+###### Listar branches e filtrar por padrão
+Este comando irá buscar branchs que possuem um nome e listar apenas as que atendem esse padrão.
+
+	git branch | grep nome_buscado 
 
 ###### Listar branches com informações dos últimos commits
 
@@ -314,24 +320,27 @@ A mensagem indicando um *merge* manual será:
 
 ###### Criando um branch remoto com o mesmo nome
 
-	git push origin bug-123
+	git push origin nome_da_branch
 
 ###### Criando um branch remoto com nome diferente
 
-	git push origin bug-123:new-branch
+	git push origin nome_da_branch:novo_nome_da_branch
 
 ##### Baixar um branch remoto para edição
 
-	git checkout -b bug-123 origin/bug-123
-
+	git checkout -b nome_da_branch origin/nome_da_branch
 
 ##### Apagar branch remoto
 
-	git push origin:bug-123
+	git push origin:nome_da_branch
+	
+ou 
+    
+    git push origin --delete nome_da_branch	
 
 ### Rebasing
 
-Fazendo o **rebase** entre um o branch bug-123 e o master.
+Fazendo o **rebase** entre um o branch nome_da_branch e o master.
 
 	git checkout experiment
 	
@@ -440,3 +449,21 @@ Se o commit estiver com o problema, então ele deverá ser marcado como **ruim**
 Depois de encontrar o commit com problema, para retornar para o *HEAD* utilize:
 	
 	git bisect reset
+
+### Alias
+O Alias é utilizado para encurtar comandos que mais utilizamos.
+
+##### Criar alias
+O 's' após o comando alias. é o comando que irá servir de alias para o comando 'status'.
+
+    git config --global alias.s status
+    git congig --global alias.p pull
+   
+##### Remover alias    
+    
+    git config --global --unset alias.s
+    git config --global --unset alias.p
+    
+    
+    
+ ###### * Arquivo clonado de [Leonardo Comielli](https://gist.github.com/leocomelli) e editado e complementado para minha utilização pessoal.     
