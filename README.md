@@ -254,9 +254,9 @@ Para criar uma tag assinada é necessário uma chave privada (GNU Privacy Guard 
 	
 ### Branches
 
-O **master** é o branch principal do GIT.
+O **master** ou **main** é o branch principal do GIT.
 
-O **HEAD** é um ponteiro *especial* que indica qual é o branch atual. Por padrão, o **HEAD** aponta para o branch principal, o **master**.
+O **HEAD** é um ponteiro *especial* que indica qual é o branch atual. Por padrão, o **HEAD** aponta para o branch principal, o **master** ou **main**.
 
 ##### Criando um novo branch
 
@@ -288,16 +288,21 @@ A mensagem indicando um *merge* manual será:
 	CONFLICT (content): Merge conflict in meu_arquivo.txt
 	Automatic merge failed; fix conflicts and then commit the result.
 
-
 ##### Apagando um branch
 
 	git branch -d nome_da_branch
+	
+ou para forçar a deleção
+
+    git branch -D nome_da_branch	
 
 ##### Listar branches 
 
-###### Listar branches
-
 	git branch
+
+ou
+
+    git branch --list 	
 	
 ###### Listar branches e filtrar por padrão
 Este comando irá buscar branchs que possuem um nome e listar apenas as que atendem esse padrão.
@@ -315,6 +320,10 @@ Este comando irá buscar branchs que possuem um nome e listar apenas as que aten
 ###### Listar branches que não foram fundidos (merged) com o **master**
 
 	git branch --no-merged
+	
+#### Renomear branches
+
+    git branch -m novo_nome
 
 ##### Criando branches no repositório remoto
 
@@ -337,6 +346,18 @@ Este comando irá buscar branchs que possuem um nome e listar apenas as que aten
 ou 
     
     git push origin --delete nome_da_branch	
+
+#### Renomear um branchs remotos
+Não é possível renomear um branch remoto diretamente. O processo de renomeação envolve seguir três etapas:
+1. Para começar, você vai precisar renomear um branch local como demostrado a cima.
+2. Então delete o branch antigo e faça push do novo.
+
+        git push origin --delete nome_antigo
+        git push origin :nome_antigo novo_nome
+
+3. Redefina o upstream branch para o seu novo branch local e estará tudo pronto:
+
+        git push origin -u novo_nome
 
 ### Rebasing
 
